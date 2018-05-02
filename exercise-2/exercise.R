@@ -115,20 +115,26 @@ ggplot(data = diamonds_sample) +
 # between)
 # TIP: You can save the plot to a variable for easier modifications
 
+bar <- ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = cut), width = 1)
 
 # Draw the same chart, but with the coordinate system flipped
 
+bar + coord_flip()
 
 # Draw the same chart, but in a polar coordinate system. It's a Coxcomb chart!
 
-
+bar + coord_polar()
 
 ## Facets
 
 # Take the scatter plot of price by carat data (colored by clarity) and add 
 # _facets_ based on the diamond's `color`
 
-
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
+  scale_color_brewer(palette = "Spectral") +
+  facet_wrap(~color)
 
 ## Saving Plots
 
@@ -136,3 +142,4 @@ ggplot(data = diamonds_sample) +
 # Name the output file "my-plot.png".
 # Make sure you've set the working directory!!
 
+ggsave("my-plot.png")
